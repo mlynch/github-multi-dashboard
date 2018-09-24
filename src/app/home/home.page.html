@@ -11,16 +11,18 @@
 
 <ion-content padding>
   <ion-list>
-    <ion-item *ngFor="let comment of allComments" button>
+    <ion-item *ngFor="let issue of allIssues" button (click)="openIssue(issue)">
       <ion-label>
-        <h2>{{comment.node.title}}</h2>
+        <h2>{{issue.node.title}}</h2>
+        <h3>Last updated {{getUpdatedAtDate(issue.node.updatedAt)}}</h3>
         <p>
-          #{{comment.node.number}}
+          #{{issue.node.number}} -
+          {{issue.node.comments.edges.length}} comments -
+          {{issue.node.reactions.edges.length}} reactions
+          {{issue.node.repository.nameWithOwner}}
         </p>
       </ion-label>
-      <ion-note slot="end">
-        {{comment.node.repository.nameWithOwner}}
-      </ion-note>
+
     </ion-item>
   </ion-list>
 </ion-content>

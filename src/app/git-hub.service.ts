@@ -12,11 +12,14 @@ const RepoQuery = gql`
       owner {
         id
       }
-      issues(first:100, orderBy: { field: CREATED_AT, direction: DESC }) {
+      issues(first:100, orderBy: { field: UPDATED_AT, direction: DESC }) {
         edges {
           node {
             title
             number
+            createdAt
+            updatedAt
+            url
             repository {
               nameWithOwner
             }
@@ -31,6 +34,7 @@ const RepoQuery = gql`
               edges {
                 node {
                   id
+                  content
                 }
               }
             }

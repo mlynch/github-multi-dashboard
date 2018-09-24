@@ -31,9 +31,11 @@
     "apollo-link": "^1.2.3",
     "apollo-link-context": "^1.0.9",
     "core-js": "^2.5.3",
+    "dayjs": "^1.7.5",
     "graphql": "^14.0.2",
     "graphql-tag": "^2.9.2",
     "rxjs": "6.2.2",
+    "timeago.js": "^4.0.0-beta.1",
     "zone.js": "^0.8.26"
   },
   "devDependencies": {
