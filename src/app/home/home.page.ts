@@ -7,6 +7,17 @@ import { GitHubService } from '../git-hub.service';
   styleUrls: ['home.page.scss'],
 })
 export class HomePage {
+  data: any;
+
+  allComments = [];
+
   constructor(public github: GitHubService) {
+    github.queryAllRepos().subscribe((data) => {
+      this.data = data;
+      console.log('Loaded repo data', data);
+      for (let d of data) {
+        this.allComments = [...this.allComments, ...d.data.repository.issues.edges];
+      }
+    });
   }
 }

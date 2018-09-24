@@ -10,7 +10,17 @@
 </ion-header>
 
 <ion-content padding>
-  The world is your oyster.
-  <p>If you get lost, the
-    <a target="_blank" rel="noopener" href="https://ionicframework.com/docs">docs</a> will be your guide.</p>
+  <ion-list>
+    <ion-item *ngFor="let comment of allComments" button>
+      <ion-label>
+        <h2>{{comment.node.title}}</h2>
+        <p>
+          #{{comment.node.number}}
+        </p>
+      </ion-label>
+      <ion-note slot="end">
+        {{comment.node.repository.nameWithOwner}}
+      </ion-note>
+    </ion-item>
+  </ion-list>
 </ion-content>
