@@ -8,7 +8,7 @@ const uri = 'https://api.github.com/graphql'; // <-- add the URL of the GraphQL 
 export function createApollo(httpLink: HttpLink) {
   const http = httpLink.create({ uri });
 
-  const auth = setContext(() => {
+  const auth = setContext((_, { headers }) => {
     // get the authentication token from local storage if it exists
     // const token = localStorage.getItem('token');
     const token = '8ded28d88ed264f4b1e29a4ec426dd8bcb0578b9';
@@ -17,6 +17,7 @@ export function createApollo(httpLink: HttpLink) {
     } else {
       return {
         headers: {
+          ...headers,
           Authorization: `Bearer ${token}`
         }
       };
