@@ -1,14 +1,55 @@
 <ion-header>
-  <ion-toolbar>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
     <ion-title>
-      Ionic Blank
+      {{repoOrgName ? repoOrgName + '/' + repoName : 'All Issues'}}
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <div class="ion-padding">
-    The world is your oyster.
-    <p>If you get lost, the <a target="_blank" rel="noopener" href="https://ionicframework.com/docs/">docs</a> will be your guide.</p>
-  </div>
+  <ion-list>
+    <ion-item *ngFor="let issue of allIssues" button (click)="openIssue(issue)" class="issue">
+      <ion-label>
+        <h2>
+          {{issue.node.title}}
+          <span [ngClass]="['issue-state', issue.node.state]">{{issue.node.state}}</span>
+          <span *ngFor="let label of issue.node.labels.nodes"
+                class="issue-label"
+                [style.backgroundColor]="'#' + label.color">{{label.name}}</span>
+        </h2>
+        <h3>Last updated {{issue.node.updatedAt | timeago}}</h3>
+        <div>
+          <div class="reaction" *ngFor="let reaction of issue.reactionGroups">
+            <div class="reaction-wrap">
+              <div class="reaction-emoji">{{reaction.emoji}}</div>
+              <div class="reaction-count">{{reaction.count}}</div>
+            </div>
+          </div>
+        </div>
+        <p>
+          #{{issue.node.number}} -
+          {{issue.node.comments.edges.length}} comments -
+          {{issue.node.reactions.edges.length}} reactions -
+          {{issue.node.repository.nameWithOwner}}
+        </p>
+        <div class="star" (click)="starIssue(issue.node); $event.stopPropagation()">
+          <ion-icon [name]="issue.isStarred ? 'star' : 'star-outline'"></ion-icon>
+        </div>
+        <!--
+        <div class="right-buttons">
+          <div class="menu" (click)="openMenu(issue.node); $event.stopPropagation()">
+            <ion-icon name="menu"></ion-icon>
+          </div>
+          <div class="star" (click)="starIssue(issue.node); $event.stopPropagation()">
+            <ion-icon [name]="issue.isStarred ? 'star' : 'star-outline'"></ion-icon>
+          </div>
+        </div>
+      -->
+      </ion-label>
+
+    </ion-item>
+  </ion-list>
 </ion-content>
