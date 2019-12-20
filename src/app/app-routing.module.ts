@@ -18,10 +18,6 @@ const routes: Routes = [
   {
     path: 'repo/:repoOrgName/:repoName',
     loadChildren: './home/home.module#HomePageModule'
-  },
-  {
-    path: 'list',
-    loadChildren: './list/list.module#ListPageModule'
   }
 ];
 
